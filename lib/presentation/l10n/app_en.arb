@@ -1,0 +1,96 @@
+{
+  "@@locale": "en",
+
+  "appName": "Misfits",
+
+  "navHome": "Home",
+  "navTopics": "Topics",
+  "navPlayers": "Players",
+  "navSettings": "Settings",
+
+  "yes": "Yes",
+  "no": "No",
+  "submit": "Submit",
+  "cancel": "Cancel",
+  "required": "Required",
+
+  "play": "Play",
+
+  "secretsCount": "{count, plural, one{1 secret} other{{count} secrets}}",
+  "@secretsCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "dismissSecretTitle": "Dismiss {name}?",
+  "@dismissSecretTitle": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "renameTopic": "Rename topic?",
+  "addSecret": "Add secret",
+  "editSecret": "Edit secret",
+
+  "newTopic": "New topic",
+  "titleLabel": "Title",
+  "secretLabel": "Secret {index}",
+  "@secretLabel": {
+    "placeholders": {
+      "index": { "type": "int" }
+    }
+  },
+
+  "dismissPlayerTitle": "Dismiss {name}?",
+  "@dismissPlayerTitle": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "addPlayer": "Add Player",
+  "editPlayer": "Edit Player",
+
+  "settingsSectionOptions": "Options",
+  "randomMisfits": "Random misfits",
+  "randomMisfitsSubtitle": "Assign a random number of misfits each game",
+  "minMisfits": "Min misfits",
+  "maxMisfits": "Max misfits",
+  "numberOfMisfits": "Number of misfits",
+  "coopMode": "Co-op mode",
+  "coopModeSubtitle": "Misfit players know each other",
+  "prankMode": "Prank mode",
+  "prankModeSubtitle": "There is a chance that all players are misfits",
+  "prankProbability": "Prank probability",
+
+  "gameCoopSummary": "Co-op: {enabled, select, true{yes} false{no} other{{enabled}}}",
+  "@gameCoopSummary": {
+    "placeholders": {
+      "enabled": { "type": "String" }
+    }
+  },
+  "gameMisfitsRangeSummary": "Misfits: {min} .. {max}",
+  "@gameMisfitsRangeSummary": {
+    "placeholders": {
+      "min": { "type": "int" },
+      "max": { "type": "int" }
+    }
+  },
+  "gameMisfitsFixedSummary": "Misfits: {count}",
+  "@gameMisfitsFixedSummary": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "theSecretIs": "The secret is:",
+  "youAreAMisfit": "You are a misfit!",
+  "allMisfits": "All misfits:",
+  "endGame": "End game?",
+  "revealMisfitsConfirmContent": "Revealing misfits will end the game. Continue?",
+  "reveal": "Reveal",
+  "revealMisfits": "Reveal Misfits",
+  "showSecrets": "Show Secrets",
+  "itWasAPrank": "It was a prank!",
+  "everyoneWasAMisfit": "Everyone was a misfit:",
+  "theMisfitsWere": "The misfits were:"
+}

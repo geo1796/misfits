@@ -1,0 +1,96 @@
+{
+  "@@locale": "fr",
+
+  "appName": "Misfits",
+
+  "navHome": "Accueil",
+  "navTopics": "Thèmes",
+  "navPlayers": "Joueurs",
+  "navSettings": "Paramètres",
+
+  "yes": "Oui",
+  "no": "Non",
+  "submit": "Valider",
+  "cancel": "Annuler",
+  "required": "Requis",
+
+  "play": "Jouer",
+
+  "secretsCount": "{count, plural, one{1 secret} other{{count} secrets}}",
+  "@secretsCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "dismissSecretTitle": "Supprimer {name} ?",
+  "@dismissSecretTitle": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "renameTopic": "Renommer le thème ?",
+  "addSecret": "Ajouter un secret",
+  "editSecret": "Modifier le secret",
+
+  "newTopic": "Nouveau thème",
+  "titleLabel": "Titre",
+  "secretLabel": "Secret {index}",
+  "@secretLabel": {
+    "placeholders": {
+      "index": { "type": "int" }
+    }
+  },
+
+  "dismissPlayerTitle": "Supprimer {name} ?",
+  "@dismissPlayerTitle": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "addPlayer": "Ajouter un joueur",
+  "editPlayer": "Modifier le joueur",
+
+  "settingsSectionOptions": "Options",
+  "randomMisfits": "Misfits aléatoires",
+  "randomMisfitsSubtitle": "Assigner un nombre aléatoire de misfits par partie",
+  "minMisfits": "Misfits min.",
+  "maxMisfits": "Misfits max.",
+  "numberOfMisfits": "Nombre de misfits",
+  "coopMode": "Mode coopératif",
+  "coopModeSubtitle": "Les joueurs misfits se connaissent",
+  "prankMode": "Mode prank",
+  "prankModeSubtitle": "Il y a une chance que tous les joueurs soient des misfits",
+  "prankProbability": "Probabilité de prank",
+
+  "gameCoopSummary": "Coop : {enabled, select, true{oui} false{non} other{{enabled}}}",
+  "@gameCoopSummary": {
+    "placeholders": {
+      "enabled": { "type": "String" }
+    }
+  },
+  "gameMisfitsRangeSummary": "Misfits : {min} .. {max}",
+  "@gameMisfitsRangeSummary": {
+    "placeholders": {
+      "min": { "type": "int" },
+      "max": { "type": "int" }
+    }
+  },
+  "gameMisfitsFixedSummary": "Misfits : {count}",
+  "@gameMisfitsFixedSummary": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "theSecretIs": "Le secret est :",
+  "youAreAMisfit": "Vous êtes un misfit !",
+  "allMisfits": "Tous les misfits :",
+  "endGame": "Fin de partie ?",
+  "revealMisfitsConfirmContent": "Révéler les misfits mettra fin à la partie. Continuer ?",
+  "reveal": "Révéler",
+  "revealMisfits": "Révéler les misfits",
+  "showSecrets": "Voir les secrets",
+  "itWasAPrank": "C'était un prank !",
+  "everyoneWasAMisfit": "Tout le monde était un misfit :",
+  "theMisfitsWere": "Les misfits étaient :"
+}

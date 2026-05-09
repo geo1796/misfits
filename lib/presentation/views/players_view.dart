@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:misfits/presentation/l10n/app_localizations.dart';
 import 'package:misfits/presentation/state/config_notifier.dart';
 import 'package:misfits/presentation/views/app_drawer.dart';
 
@@ -47,30 +48,34 @@ class PlayersView extends ConsumerWidget {
     String player,
   ) async => await showDialog(
     context: context,
-    builder: (context) => AlertDialog(
-      title: Text('Dismiss $player ?'),
-      actions: [
-        TextButton(
-          onPressed: () => context.pop(false),
-          child: const Text('No'),
-        ),
-        TextButton(
-          onPressed: () => context.pop(true),
-          child: const Text('Yes'),
-        ),
-      ],
-    ),
+    builder: (context) {
+      final l = AppLocalizations.of(context)!;
+      return AlertDialog(
+        title: Text(l.dismissPlayerTitle(player)),
+        actions: [
+          TextButton(
+            onPressed: () => context.pop(false),
+            child: Text(l.no),
+          ),
+          TextButton(
+            onPressed: () => context.pop(true),
+            child: Text(l.yes),
+          ),
+        ],
+      );
+    },
   );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context)!;
     final config = ref.watch(configProvider);
     final notifier = ref.read(configProvider.notifier);
     final players = config.players;
 
     return Scaffold(
       drawer: const AppDrawer(),
-      appBar: AppBar(title: const Text('Players')),
+      appBar: AppBar(title: Text(l.navPlayers)),
       body: ListView(
         children: [
           ...List.generate(
@@ -156,17 +161,16 @@ class _PlayerFormDialogState extends State<_PlayerFormDialog> {
 
   @override
   Widget build(BuildContext context) {
-    void onSubmit() {
-      if (!form.currentState!.validate()) {
-        return;
-      }
-      form.currentState!.save();
+    final l = AppLocalizations.of(context)!;
 
+    void onSubmit() {
+      if (!form.currentState!.validate()) return;
+      form.currentState!.save();
       widget.submit(controller.text.trim());
     }
 
     return AlertDialog(
-      title: Text(widget.initial == null ? 'Add Player' : 'Edit Player'),
+      title: Text(widget.initial == null ? l.addPlayer : l.editPlayer),
       content: Form(
         key: form,
         child: TextFormField(
@@ -177,14 +181,8 @@ class _PlayerFormDialogState extends State<_PlayerFormDialog> {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: context.pop,
-          child: const Text('Cancel'),
-        ),
-        TextButton(
-          onPressed: onSubmit,
-          child: const Text('Submit'),
-        ),
+        TextButton(onPressed: context.pop, child: Text(l.cancel)),
+        TextButton(onPressed: onSubmit, child: Text(l.submit)),
       ],
     );
   }

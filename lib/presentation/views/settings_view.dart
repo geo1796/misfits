@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:misfits/presentation/l10n/app_localizations.dart';
 import 'package:misfits/presentation/state/config_notifier.dart';
 import 'package:misfits/presentation/views/app_drawer.dart';
 
@@ -8,54 +9,53 @@ class SettingsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context)!;
     final config = ref.watch(configProvider);
     final notifier = ref.read(configProvider.notifier);
     final settings = config.settings;
 
     return Scaffold(
       drawer: const AppDrawer(),
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(title: Text(l.navSettings)),
       body: ListView(
         children: [
-          const _SectionHeader('Misfits'),
+          _SectionHeader(l.appName),
           SwitchListTile(
-            title: const Text('Random misfits'),
-            subtitle: const Text('Assign a random number of misfits each game'),
+            title: Text(l.randomMisfits),
+            subtitle: Text(l.randomMisfitsSubtitle),
             value: settings.randomMisfits,
             onChanged: (_) => notifier.toggleRandomMisfits(),
           ),
           if (settings.randomMisfits) ...[
             _CounterRow(
-              label: 'Min misfits',
+              label: l.minMisfits,
               value: settings.minMisfits,
               onDecrease: notifier.decreaseMinMisfits,
               onIncrease: notifier.increaseMinMisfits,
             ),
             _CounterRow(
-              label: 'Max misfits',
+              label: l.maxMisfits,
               value: settings.maxMisfits,
               onDecrease: notifier.decreaseMaxMisfits,
               onIncrease: notifier.increaseMaxMisfits,
             ),
           ] else
             _CounterRow(
-              label: 'Number of misfits',
+              label: l.numberOfMisfits,
               value: settings.fixedMisfits,
               onDecrease: notifier.decreaseFixedMisfits,
               onIncrease: notifier.increaseFixedMisfits,
             ),
-          const _SectionHeader('Options'),
+          _SectionHeader(l.settingsSectionOptions),
           SwitchListTile(
-            title: const Text('Co-op mode'),
-            subtitle: const Text('Misfit players know each other'),
+            title: Text(l.coopMode),
+            subtitle: Text(l.coopModeSubtitle),
             value: settings.enableCoop,
             onChanged: (_) => notifier.toggleCoop(),
           ),
           SwitchListTile(
-            title: const Text('Prank mode'),
-            subtitle: const Text(
-              'There is a chance that all players are misfits',
-            ),
+            title: Text(l.prankMode),
+            subtitle: Text(l.prankModeSubtitle),
             value: settings.enablePrank,
             onChanged: (_) => notifier.togglePrank(),
           ),
@@ -143,8 +143,9 @@ class _PrankProbabilityRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     return ListTile(
-      title: const Text('Prank probability'),
+      title: Text(l.prankProbability),
       subtitle: Slider(
         value: probability.toDouble(),
         min: 5,

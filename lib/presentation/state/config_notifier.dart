@@ -6,18 +6,21 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'config_notifier.g.dart';
 
 const defaultPlayers = <String>[
-  'Player 1',
-  'Player 2',
-  'Player 3',
+  'Maelle',
+  'Verso',
+  'Gustave',
+  'Lune',
+  'Sciel',
+  'Monoco',
 ];
 
 const _defaultConfig = Config(
   settings: Settings(
-    fixedMisfits: 1,
+    fixedMisfits: 2,
     enableCoop: false,
     randomMisfits: false,
-    minMisfits: 0,
-    maxMisfits: 1,
+    minMisfits: 1,
+    maxMisfits: 3,
     enablePrank: false,
     prankProbability: 25,
   ),

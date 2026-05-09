@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:misfits/domain/entities/topic.dart';
+import 'package:misfits/presentation/l10n/app_localizations.dart';
 import 'package:misfits/presentation/routing/routes.dart';
 import 'package:misfits/presentation/state/topics_notifier.dart';
 
@@ -21,6 +22,13 @@ class _TopicFormViewState extends ConsumerState<TopicFormView> {
     _secretCount,
     (i) => TextEditingController(),
   );
+  late AppLocalizations _l;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _l = AppLocalizations.of(context)!;
+  }
 
   @override
   void dispose() {
@@ -34,13 +42,13 @@ class _TopicFormViewState extends ConsumerState<TopicFormView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('New topic')),
+      appBar: AppBar(title: Text(_l.newTopic)),
       body: Form(
         key: form,
         child: ListView(
           children: [
             Row(
-              mainAxisAlignment: .spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
                   onPressed: () => context.go(const TopicsRoute().location),
@@ -60,7 +68,7 @@ class _TopicFormViewState extends ConsumerState<TopicFormView> {
               padding: const EdgeInsets.all(16.0),
               child: TextFormField(
                 controller: titleController,
-                decoration: const InputDecoration(labelText: 'Title'),
+                decoration: InputDecoration(labelText: _l.titleLabel),
                 validator: validate,
                 textInputAction: TextInputAction.next,
               ),
@@ -71,7 +79,7 @@ class _TopicFormViewState extends ConsumerState<TopicFormView> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: secretControllers[i],
-                  decoration: InputDecoration(labelText: 'Secret ${i + 1}'),
+                  decoration: InputDecoration(labelText: _l.secretLabel(i + 1)),
                   validator: validate,
                   textInputAction: i + 1 == _secretCount
                       ? TextInputAction.done
@@ -89,7 +97,7 @@ class _TopicFormViewState extends ConsumerState<TopicFormView> {
   String? validate(String? value) {
     value = value?.trim();
     if (value == null || value.isEmpty) {
-      return 'Required';
+      return _l.required;
     }
     return null;
   }

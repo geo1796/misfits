@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:misfits/presentation/l10n/app_localizations.dart';
 import 'package:misfits/presentation/routing/router.dart';
 import 'package:misfits/presentation/routing/routes.dart';
 import 'package:misfits/presentation/state/topics_notifier.dart';
@@ -10,12 +11,13 @@ class TopicsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context)!;
     final state = ref.watch(topicsProvider);
     final notifier = ref.read(topicsProvider.notifier);
 
     return Scaffold(
       drawer: const AppDrawer(),
-      appBar: AppBar(title: const Text('Topics')),
+      appBar: AppBar(title: Text(l.navTopics)),
       body: ListView.builder(
         itemCount: state.topics.length,
         itemBuilder: (context, index) {
@@ -29,7 +31,7 @@ class TopicsView extends ConsumerWidget {
               onPressed: () => notifier.setActiveTopic(topic.id),
             ),
             title: Text(topic.title),
-            subtitle: Text('${topic.secrets.length} secrets'),
+            subtitle: Text(l.secretsCount(topic.secrets.length)),
             trailing: const Icon(Icons.chevron_right),
             onTap: () {
               ref

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:misfits/presentation/l10n/app_localizations.dart';
 import 'package:misfits/presentation/routing/router.dart';
 import 'package:misfits/presentation/routing/routes.dart';
 
@@ -10,6 +11,7 @@ class AppDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentPath = GoRouterState.of(context).uri.path;
+    final l = AppLocalizations.of(context)!;
 
     return Drawer(
       child: Column(
@@ -22,37 +24,37 @@ class AppDrawer extends ConsumerWidget {
                 const SizedBox(height: 8),
                 _NavItem(
                   icon: Icons.home_outlined,
-                  label: 'Home',
+                  label: l.navHome,
                   isActive: currentPath == HomeRoute.fullPath,
                   onTap: () {
-                    Navigator.of(context).pop();
+                    context.pop();
                     ref.read(routerProvider).go(const HomeRoute().location);
                   },
                 ),
                 _NavItem(
                   icon: Icons.category_outlined,
-                  label: 'Topics',
+                  label: l.navTopics,
                   isActive: currentPath.startsWith(TopicsRoute.fullPath),
                   onTap: () {
-                    Navigator.of(context).pop();
+                    context.pop();
                     ref.read(routerProvider).go(const TopicsRoute().location);
                   },
                 ),
                 _NavItem(
                   icon: Icons.group_outlined,
-                  label: 'Players',
+                  label: l.navPlayers,
                   isActive: currentPath == PlayersRoute.fullPath,
                   onTap: () {
-                    Navigator.of(context).pop();
+                    context.pop();
                     ref.read(routerProvider).go(const PlayersRoute().location);
                   },
                 ),
                 _NavItem(
                   icon: Icons.settings_outlined,
-                  label: 'Settings',
+                  label: l.navSettings,
                   isActive: currentPath == SettingsRoute.fullPath,
                   onTap: () {
-                    Navigator.of(context).pop();
+                    context.pop();
                     ref.read(routerProvider).go(const SettingsRoute().location);
                   },
                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:misfits/domain/entities/topic.dart';
+import 'package:misfits/presentation/l10n/app_localizations.dart';
 import 'package:misfits/presentation/state/topics_notifier.dart';
 
 class TopicDetailsView extends ConsumerWidget {
@@ -67,19 +68,22 @@ class TopicDetailsView extends ConsumerWidget {
     String secret,
   ) async => await showDialog(
     context: context,
-    builder: (context) => AlertDialog(
-      title: Text('Dismiss $secret ?'),
-      actions: [
-        TextButton(
-          onPressed: () => context.pop(false),
-          child: const Text('No'),
-        ),
-        TextButton(
-          onPressed: () => context.pop(true),
-          child: const Text('Yes'),
-        ),
-      ],
-    ),
+    builder: (context) {
+      final l = AppLocalizations.of(context)!;
+      return AlertDialog(
+        title: Text(l.dismissSecretTitle(secret)),
+        actions: [
+          TextButton(
+            onPressed: () => context.pop(false),
+            child: Text(l.no),
+          ),
+          TextButton(
+            onPressed: () => context.pop(true),
+            child: Text(l.yes),
+          ),
+        ],
+      );
+    },
   );
 
   @override
@@ -188,17 +192,16 @@ class _TopicTitleFormDialogState extends State<_TopicTitleFormDialog> {
 
   @override
   Widget build(BuildContext context) {
-    void onSubmit() {
-      if (!form.currentState!.validate()) {
-        return;
-      }
-      form.currentState!.save();
+    final l = AppLocalizations.of(context)!;
 
+    void onSubmit() {
+      if (!form.currentState!.validate()) return;
+      form.currentState!.save();
       widget.submit(controller.text.trim());
     }
 
     return AlertDialog(
-      title: const Text('Rename topic ?'),
+      title: Text(l.renameTopic),
       content: Form(
         key: form,
         child: TextFormField(
@@ -208,11 +211,8 @@ class _TopicTitleFormDialogState extends State<_TopicTitleFormDialog> {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: context.pop,
-          child: const Text('Cancel'),
-        ),
-        TextButton(onPressed: onSubmit, child: const Text('Submit')),
+        TextButton(onPressed: context.pop, child: Text(l.cancel)),
+        TextButton(onPressed: onSubmit, child: Text(l.submit)),
       ],
     );
   }
@@ -250,17 +250,16 @@ class __TopicSecretFormDialogState extends State<_TopicSecretFormDialog> {
 
   @override
   Widget build(BuildContext context) {
-    void onSubmit() {
-      if (!form.currentState!.validate()) {
-        return;
-      }
-      form.currentState!.save();
+    final l = AppLocalizations.of(context)!;
 
+    void onSubmit() {
+      if (!form.currentState!.validate()) return;
+      form.currentState!.save();
       widget.submit(controller.text.trim());
     }
 
     return AlertDialog(
-      title: Text(widget.initial == null ? 'Add secret' : 'Edit secret'),
+      title: Text(widget.initial == null ? l.addSecret : l.editSecret),
       content: Form(
         key: form,
         child: TextFormField(
@@ -270,11 +269,8 @@ class __TopicSecretFormDialogState extends State<_TopicSecretFormDialog> {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: context.pop,
-          child: const Text('Cancel'),
-        ),
-        TextButton(onPressed: onSubmit, child: const Text('Submit')),
+        TextButton(onPressed: context.pop, child: Text(l.cancel)),
+        TextButton(onPressed: onSubmit, child: Text(l.submit)),
       ],
     );
   }

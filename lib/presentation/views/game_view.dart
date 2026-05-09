@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misfits/domain/entities/game.dart';
+import 'package:misfits/presentation/l10n/app_localizations.dart';
 import 'package:misfits/presentation/state/config_notifier.dart';
 import 'package:misfits/presentation/state/game_notifier.dart';
 import 'package:misfits/presentation/state/game_state.dart';
@@ -44,29 +45,24 @@ class _GameConfigSummary extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context)!;
     final config = ref.watch(configProvider);
     const style = TextStyle(fontWeight: FontWeight.bold);
     return Column(
-      mainAxisSize: .min,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Co-op: ${config.settings.enableCoop}',
+          l.gameCoopSummary(config.settings.enableCoop.toString()),
           style: style,
         ),
-        Builder(
-          builder: (context) {
-            var text = 'Misfits: ';
-            if (config.settings.randomMisfits) {
-              text +=
-                  '${config.settings.minMisfits} .. ${config.settings.maxMisfits}';
-            } else {
-              text += '${config.settings.fixedMisfits}';
-            }
-            return Text(
-              text,
-              style: style,
-            );
-          },
+        Text(
+          config.settings.randomMisfits
+              ? l.gameMisfitsRangeSummary(
+                  config.settings.minMisfits,
+                  config.settings.maxMisfits,
+                )
+              : l.gameMisfitsFixedSummary(config.settings.fixedMisfits),
+          style: style,
         ),
       ],
     );
@@ -100,7 +96,7 @@ class _PlayerChecksColumn extends StatelessWidget {
                       showModalBottomSheet<void>(
                         context: context,
                         builder: (_) => SizedBox(
-                          width: .infinity,
+                          width: double.infinity,
                           child: _PlayerSecretSheet(
                             player: entry.key,
                             game: game,
@@ -129,6 +125,7 @@ class _PlayerSecretSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context)!;
     final textTheme = Theme.of(context).textTheme;
 
     if (!isMisfit) {
@@ -138,7 +135,7 @@ class _PlayerSecretSheet extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('The secret is:', style: textTheme.titleMedium),
+            Text(l.theSecretIs, style: textTheme.titleMedium),
             const SizedBox(height: 8),
             Text(secret, style: textTheme.headlineMedium),
           ],
@@ -158,10 +155,10 @@ class _PlayerSecretSheet extends ConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('You are a misfit!', style: textTheme.headlineMedium),
+          Text(l.youAreAMisfit, style: textTheme.headlineMedium),
           if (coMisfits.isNotEmpty) ...[
             const SizedBox(height: 16),
-            Text('All misfits:', style: textTheme.titleMedium),
+            Text(l.allMisfits, style: textTheme.titleMedium),
             const SizedBox(height: 8),
             for (final misfit in coMisfits) Text('• $misfit'),
           ],
@@ -183,20 +180,23 @@ class _ActionsRow extends StatelessWidget {
   Future<void> _onRevealMisfits(BuildContext context) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('End game?'),
-        content: const Text('Revealing misfits will end the game. Continue?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(true),
-            child: const Text('Reveal'),
-          ),
-        ],
-      ),
+      builder: (dialogContext) {
+        final l = AppLocalizations.of(dialogContext)!;
+        return AlertDialog(
+          title: Text(l.endGame),
+          content: Text(l.revealMisfitsConfirmContent),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(false),
+              child: Text(l.cancel),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(true),
+              child: Text(l.reveal),
+            ),
+          ],
+        );
+      },
     );
 
     if (confirmed != true || !context.mounted) return;
@@ -204,7 +204,7 @@ class _ActionsRow extends StatelessWidget {
     await showModalBottomSheet<void>(
       context: context,
       builder: (_) => SizedBox(
-        width: .infinity,
+        width: double.infinity,
         child: _RevealMisfitsSheet(game: game),
       ),
     );
@@ -216,7 +216,7 @@ class _ActionsRow extends StatelessWidget {
     showModalBottomSheet<void>(
       context: context,
       builder: (_) => SizedBox(
-        width: .infinity,
+        width: double.infinity,
         child: _SecretsSheet(game: game, gameNotifier: gameNotifier),
       ),
     );
@@ -224,16 +224,17 @@ class _ActionsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         TextButton(
           onPressed: () => _onRevealMisfits(context),
-          child: const Text('Reveal Misfits'),
+          child: Text(l.revealMisfits),
         ),
         TextButton(
           onPressed: () => _onShowSecrets(context),
-          child: const Text('Show Secrets'),
+          child: Text(l.showSecrets),
         ),
       ],
     );
@@ -247,6 +248,7 @@ class _RevealMisfitsSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     final textTheme = Theme.of(context).textTheme;
     final misfits = game.map(
       regular: (g) => g.misfits,
@@ -260,11 +262,11 @@ class _RevealMisfitsSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (isPrank) ...[
-            Text('It was a prank!', style: textTheme.headlineMedium),
+            Text(l.itWasAPrank, style: textTheme.headlineMedium),
             const SizedBox(height: 8),
-            Text('Everyone was a misfit:', style: textTheme.titleMedium),
+            Text(l.everyoneWasAMisfit, style: textTheme.titleMedium),
           ] else
-            Text('The misfits were:', style: textTheme.titleMedium),
+            Text(l.theMisfitsWere, style: textTheme.titleMedium),
           const SizedBox(height: 8),
           for (final misfit in misfits) Text('• $misfit'),
         ],
