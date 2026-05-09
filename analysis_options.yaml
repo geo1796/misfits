@@ -1,0 +1,15 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_print: true
+    prefer_single_quotes: true
+    prefer_const_constructors: true
+    always_use_package_imports: true
+    always_declare_return_types: true
+    avoid_void_async: true
+    unawaited_futures: true
+    unnecessary_async: true
+
+formatter:
+  trailing_commas: preserve
