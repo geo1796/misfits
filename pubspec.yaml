@@ -39,15 +39,15 @@ flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/icons/misfits_launcher_icon_1024.png"
-  adaptive_icon_background: "#0F0F2D"
+  adaptive_icon_background: "#000000"
   adaptive_icon_foreground: "assets/icons/misfits_foreground_1024.png"
 
 flutter_native_splash:
-  color: "#17182D"
+  color: "#000000"
   image: assets/splash/misfits_splash_full_1152.png
 
   android_12:
-    color: "#17182D"
+    color: "#000000"
     image: assets/splash/misfits_splash_android12_960.png
 
 flutter:
