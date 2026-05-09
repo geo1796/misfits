@@ -133,7 +133,6 @@ class _PlayerSecretSheet extends ConsumerWidget {
       return Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Text(l.theSecretIs, style: textTheme.titleMedium),
             const SizedBox(height: 8),
@@ -153,7 +152,6 @@ class _PlayerSecretSheet extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Text(l.youAreAMisfit, style: textTheme.headlineMedium),
           if (coMisfits.isNotEmpty) ...[
@@ -259,7 +257,6 @@ class _RevealMisfitsSheet extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           if (isPrank) ...[
             Text(l.itWasAPrank, style: textTheme.headlineMedium),

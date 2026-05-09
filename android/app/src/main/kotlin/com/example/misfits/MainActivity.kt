@@ -1,4 +1,4 @@
-package com.example.misfits
+package com.gocorp.misfits
 
 import io.flutter.embedding.android.FlutterActivity
 
