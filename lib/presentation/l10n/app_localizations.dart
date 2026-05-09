@@ -299,7 +299,7 @@ abstract class AppLocalizations {
   /// No description provided for @gameCoopSummary.
   ///
   /// In en, this message translates to:
-  /// **'Co-op: {enabled, select, true{yes} false{no} other{enabled}}}'**
+  /// **'Co-op: {enabled, select, true{yes} false{no} other{{enabled}}}'**
   String gameCoopSummary(String enabled);
 
   /// No description provided for @gameMisfitsRangeSummary.

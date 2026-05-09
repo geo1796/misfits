@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:misfits/domain/entities/topic.dart';
 import 'package:misfits/domain/repositories/topics_repository.dart';
 import 'package:misfits/presentation/state/topics_state.dart';
@@ -7,20 +8,57 @@ part 'topics_notifier.g.dart';
 
 const _defaultTopicId = 0;
 
-const _defaultTopic = Topic(
+const _defaultTopicEN = Topic(
   id: _defaultTopicId,
-  title: 'Default',
+  title: 'Locations',
   secrets: [
-    'Secret 1',
-    'Secret 2',
-    'Secret 3',
-    'Secret 4',
-    'Secret 5',
-    'Secret 6',
-    'Secret 7',
-    'Secret 8',
-    'Secret 9',
-    'Secret 10',
+    'Restaurant',
+    'Hospital',
+    'Airport',
+    'Hotel',
+    'School',
+    'Beach',
+    'Library',
+    'Museum',
+    'Supermarket',
+    'Cinema',
+    'Train Station',
+    'Bank',
+    'Police Station',
+    'Church',
+    'Zoo',
+    'Casino',
+    'Prison',
+    'Circus',
+    'Space Station',
+    'Submarine',
+  ],
+);
+
+const _defaultTopicFR = Topic(
+  id: _defaultTopicId,
+  title: 'Lieux',
+  secrets: [
+    'Restaurant',
+    'Hôpital',
+    'Aéroport',
+    'Hôtel',
+    'École',
+    'Plage',
+    'Bibliothèque',
+    'Musée',
+    'Supermarché',
+    'Cinéma',
+    'Gare',
+    'Banque',
+    'Commissariat',
+    'Église',
+    'Zoo',
+    'Casino',
+    'Prison',
+    'Cirque',
+    'Station spatiale',
+    'Sous-marin',
   ],
 );
 
@@ -41,9 +79,13 @@ class TopicsNotifier extends _$TopicsNotifier {
 
     final topics = _repo.getTopics();
     if (topics == null || topics.isEmpty) {
-      return const TopicsState(
+      return TopicsState(
         activeTopicId: _defaultTopicId,
-        topics: [_defaultTopic],
+        topics: [
+          WidgetsBinding.instance.platformDispatcher.locale.languageCode == 'fr'
+              ? _defaultTopicFR
+              : _defaultTopicEN,
+        ],
       );
     }
 

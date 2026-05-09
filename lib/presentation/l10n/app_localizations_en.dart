@@ -130,7 +130,7 @@ class AppLocalizationsEn extends AppLocalizations {
       {
         'true': 'yes',
         'false': 'no',
-        'other': 'enabled',
+        'other': '$enabled',
       },
     );
     return 'Co-op: $_temp0';

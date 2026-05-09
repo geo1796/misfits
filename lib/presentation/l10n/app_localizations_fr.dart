@@ -114,14 +114,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get coopModeSubtitle => 'Les joueurs misfits se connaissent';
 
   @override
-  String get prankMode => 'Mode blague';
+  String get prankMode => 'Mode prank';
 
   @override
   String get prankModeSubtitle =>
       'Il y a une chance que tous les joueurs soient des misfits';
 
   @override
-  String get prankProbability => 'Probabilité de blague';
+  String get prankProbability => 'Probabilité de prank';
 
   @override
   String gameCoopSummary(String enabled) {
@@ -172,7 +172,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get showSecrets => 'Voir les secrets';
 
   @override
-  String get itWasAPrank => 'C\'était une blague !';
+  String get itWasAPrank => 'C\'était un prank !';
 
   @override
   String get everyoneWasAMisfit => 'Tout le monde était un misfit :';
